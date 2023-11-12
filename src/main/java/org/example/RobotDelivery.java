@@ -55,8 +55,10 @@ public class RobotDelivery {
         return count;
     }
 
-    public static synchronized void updateSizeToFreq(int countR) {
-        sizeToFreq.merge(countR, 1, Integer::sum);
+    public static void updateSizeToFreq(int countR) {
+        synchronized (sizeToFreq) {
+            sizeToFreq.merge(countR, 1, Integer::sum);
+        }
     }
 
     public static void printResults() {
